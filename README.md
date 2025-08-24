@@ -91,8 +91,4 @@ MIT License © Shinichi
 
 - **Github**: Kudo Shinichi
 - **Email**: tronghieutruonghp@gmail.com
-<<<<<<< HEAD
-```
-=======
-```
->>>>>>> 598fed0 (Feat/HieuTruong/updated/200/OK)
+
