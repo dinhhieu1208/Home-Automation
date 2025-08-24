@@ -1,0 +1,499 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SmartHome IoT API",
+    "version": "1.0.0",
+    "description": "OpenAPI documentation for SmartHome IoT system (Mobile App + Admin Web)"
+  },
+  "paths": {
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "Đăng nhập (JWT)",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "summary": "Đăng xuất",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/forgot-password": {
+      "post": {
+        "summary": "Gửi email quên mật khẩu",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reset-password": {
+      "post": {
+        "summary": "Đặt lại mật khẩu mới",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/rooms": {
+      "get": {
+        "summary": "Lấy danh sách phòng của user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/devices/by-room/{room_id}": {
+      "get": {
+        "summary": "Lấy thiết bị trong phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/devices/{device_id}": {
+      "put": {
+        "summary": "Điều khiển thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/devices/{device_id}/status": {
+      "get": {
+        "summary": "Lấy trạng thái thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/by-room/{room_id}": {
+      "get": {
+        "summary": "Dữ liệu cảm biến theo phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/sensors/{sensor_id}": {
+      "get": {
+        "summary": "Dữ liệu chi tiết một cảm biến",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "summary": "Lấy danh sách thông báo cảnh báo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/read": {
+      "post": {
+        "summary": "Đánh dấu đã đọc",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/settings": {
+      "put": {
+        "summary": "Cấu hình loại thông báo nhận",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/schedules": {
+      "post": {
+        "summary": "Tạo lịch điều khiển thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/schedules/my": {
+      "get": {
+        "summary": "Lấy danh sách lịch đã đặt",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/schedules/{id}/toggle": {
+      "put": {
+        "summary": "Kích hoạt / tạm dừng lịch",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/logs": {
+      "get": {
+        "summary": "Lấy lịch sử điều khiển thiết bị của user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "summary": "Lấy thông tin cá nhân",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "Cập nhật thông tin cá nhân",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/me/password": {
+      "put": {
+        "summary": "Đổi mật khẩu",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/login": {
+      "post": {
+        "summary": "Đăng nhập Admin",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users": {
+      "post": {
+        "summary": "Tạo tài khoản người dùng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users/{user_id}/role": {
+      "put": {
+        "summary": "Phân quyền: admin/user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/permissions/room-device": {
+      "post": {
+        "summary": "Gán user quyền điều khiển phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users/{user_id}": {
+      "delete": {
+        "summary": "Xóa hoặc khóa tài khoản",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/rooms": {
+      "post": {
+        "summary": "Tạo phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/rooms/{room_id}": {
+      "put": {
+        "summary": "Sửa phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Xóa phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/rooms/{room_id}/devices": {
+      "post": {
+        "summary": "Gán thiết bị vào phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/rooms/{room_id}/status": {
+      "get": {
+        "summary": "Trạng thái thiết bị, cảm biến theo phòng",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/devices": {
+      "post": {
+        "summary": "Thêm thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/devices/{device_id}": {
+      "put": {
+        "summary": "Cập nhật thông tin thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/devices/{device_id}/default-config": {
+      "put": {
+        "summary": "Cấu hình trạng thái mặc định",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/permissions/device-user": {
+      "post": {
+        "summary": "Gán thiết bị cho user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/devices/{device_id}/control": {
+      "put": {
+        "summary": "Điều khiển thiết bị từ admin",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/sensors/live": {
+      "get": {
+        "summary": "Dữ liệu cảm biến realtime",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/sensors/chart": {
+      "get": {
+        "summary": "Biểu đồ cảm biến",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/sensors/thresholds": {
+      "put": {
+        "summary": "Đặt ngưỡng cảnh báo vượt mức",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/logs/devices": {
+      "get": {
+        "summary": "Nhật ký điều khiển thiết bị",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/logs/alerts": {
+      "get": {
+        "summary": "Log cảnh báo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/logs/filter": {
+      "post": {
+        "summary": "Lọc log",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/notifications/config": {
+      "put": {
+        "summary": "Cấu hình gửi cảnh báo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/notifications/send": {
+      "post": {
+        "summary": "Gửi thông báo đến user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/notifications/history": {
+      "get": {
+        "summary": "Lịch sử thông báo đã gửi",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/schedules": {
+      "post": {
+        "summary": "Tạo lịch điều khiển",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/schedules/auto-mode": {
+      "put": {
+        "summary": "Tự động từ cảm biến",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/schedules/pending": {
+      "get": {
+        "summary": "Lấy danh sách lịch cần duyệt",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/schedules/{schedule_id}/approve": {
+      "put": {
+        "summary": "Duyệt lịch người dùng tạo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/dashboard/overview": {
+      "get": {
+        "summary": "Tổng quan hệ thống",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

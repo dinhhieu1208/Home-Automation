@@ -1,0 +1,32 @@
+name: smarthome_user_app
+description: Smart Home User App
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.6
+  dio: ^5.4.1
+  google_fonts: ^6.2.1
+  font_awesome_flutter: ^10.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/src/assets/images/Logo_SmartHome.png
+    - lib/src/assets/images/logo_facebook.png
+    - lib/src/assets/images/logo_google.png
+    - lib/src/assets/images/logo_phone.png
+    - lib/src/assets/images/cloud.png
+    - lib/src/assets/images/profile.png
+
