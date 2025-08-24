@@ -17,13 +17,15 @@ SmartHome IoT là một hệ thống nhà thông minh cho phép người dùng �
  🧱 Cấu trúc thư mục chính
 
 
+ 🧱 Cấu trúc thư mục chính
+
+
 smarthome/    
 ├── client/                # giao diện người dùng
 ├── server/                # Server backend FastAPI
 ├── db/                    # Migration, schema, seed
 ├── railway/               # Railway config để deploy
 └── README.md              # File này
-```
 
 
 ⚙️ Công nghệ sử dụng
