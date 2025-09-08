@@ -1,11 +1,10 @@
-<<<<<<< HEAD
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
 import { MaterialTailwindControllerProvider } from "@/store";
+import { AuthProvider } from "./contexts/AuthContext"; 
 import "@/styles/tailwind.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -13,20 +12,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <ThemeProvider>
         <MaterialTailwindControllerProvider>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
     </BrowserRouter>
-=======
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-
-import "./styles/tailwind.css";
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
->>>>>>> 598fed0 (Feat/HieuTruong/updated/200/OK)
   </React.StrictMode>
 );

@@ -8,7 +8,7 @@ const topMenu = [
   { icon: "door_front", link: "/rooms" },
   { icon: "tv", link: "/devices" },
   { icon: "people", link: "/members" },
-  { icon: "mail", link: "/messages" },
+  { icon: "message", link: "/messages" },
   { icon: "cloud", link: "/cloud" },
   { icon: "bar_chart", link: "/analytics" },
   { icon: "notifications", link: "/notifications" },

@@ -1,4 +1,3 @@
-// AppRoutes.jsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import AdminLayout from "../layouts/AdminLayout"; 
@@ -9,11 +8,19 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import DevicesPage from "../pages/DevicesPage";
 import SettingsPage from "../pages/SettingsPage";
+import CloudPage from "../pages/CloudPage";
+import AnalyticsPage from "../pages/AnalyticPage";
+import NotificationsPage from "../pages/NotificationsPage";
+import MessagesPage from "../pages/MessagePage";
 
 import DashboardView from "../views/dashboard/DashboardView";
 import DeviceListView from "../views/devices/DeviceListView";
 import RoomListView from "../views/rooms/RoomListView";
 import MemberListView from "../views/members/MemberListView";
+import CloudView from "../views/cloud/CloudView";
+import AnalyticsView from "../views/analytics/AnalyticsView";
+import NotificationView from "../views/notifications/NotificationsView";
+import MessageView from "../views/messages/MessageView";
 
 export default function AppRoutes() {
   return (
@@ -37,7 +44,19 @@ export default function AppRoutes() {
           </Route>
           <Route path="/rooms" element={<RoomListView />} />
           <Route path="/members" element={<MemberListView />} /> 
-           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/settings/*" element={<SettingsPage />} />
+            <Route path="/cloud" element={<CloudPage />}>
+          <Route index element={<CloudView />} />
+          </Route>
+          <Route path="/analytics" element={<AnalyticsPage />}>
+            <Route index element={<AnalyticsView />} />
+          </Route>
+          <Route path="/notifications" element={<NotificationsPage />}>
+            <Route index element={<NotificationView />} />
+          </Route>
+          <Route path="/messages" element={<MessagesPage />}>
+            <Route index element={<MessageView />} />
+          </Route>
         </Route>
         
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />

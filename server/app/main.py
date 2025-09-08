@@ -5,7 +5,6 @@ from app.services.notify_service import ws_manager
 
 app = FastAPI(title="SmartHome API")
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

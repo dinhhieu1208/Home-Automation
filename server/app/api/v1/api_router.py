@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, devices, rooms, members, notifications, admin_profile, power_consumptions, roomaccess,memberManagements
+from app.api.v1.endpoints import auth, devices, rooms, members, notifications, admin_profile, power_consumptions, roomaccess,memberManagements,cloud,analytics,chat
 
 api_router = APIRouter()
 
@@ -13,4 +13,6 @@ api_router.include_router(admin_profile.router, prefix="", tags=["admin_profile"
 api_router.include_router(power_consumptions.router, prefix="/power-consumptions", tags=["power consumptions"])
 api_router.include_router(roomaccess.router, prefix="/roomaccess", tags=["roomaccess"])
 api_router.include_router(memberManagements.router, prefix="/member-managements", tags=["memberManagements"])
-
+api_router.include_router(cloud.router, prefix="/cloud", tags=["cloud"])
+api_router.include_router(analytics.router, prefix="/analytics", tags=["Analytics"])
+api_router.include_router(analytics.router, prefix="/chat", tags=["Analytics"])

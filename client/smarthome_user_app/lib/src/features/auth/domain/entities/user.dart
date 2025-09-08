@@ -1,13 +1,11 @@
 class User {
   final String id;
   final String email;
-  final String name;
-  final String? avatar;
+  final String token;
 
   User({
-    required this.id,
-    required this.email,
-    required this.name,
-    this.avatar,
+    this.id = "", // không bắt buộc
+    this.email = "", // không bắt buộc
+    required this.token, // bắt buộc vì server trả access_token
   });
 }
