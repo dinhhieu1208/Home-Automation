@@ -1,33 +1,49 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import '../models/user_model.dart';
+import '../../../../config/config.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
-  Future<void> logout();
-  Future<void> sendPasswordResetEmail(String email);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final Dio dio;
+  final http.Client client;
+  final String baseUrl;
 
-  AuthRemoteDataSourceImpl({required this.dio});
+  AuthRemoteDataSourceImpl(this.client, {required this.baseUrl});
 
   @override
   Future<UserModel> login(String email, String password) async {
-    final response = await dio.post(
-      '/auth/login',
-      data: {'email': email, 'password': password},
-    );
-    return UserModel.fromJson(response.data['user']);
-  }
+    final uri = Uri.parse("$baseUrl/api/v1/auth/login");
+    final bodyJson = jsonEncode({"email": email, "password": password});
 
-  @override
-  Future<void> logout() async {
-    await dio.post('/auth/logout');
-  }
+    // ---- LOG RA CMD ----
+    print("=== LOGIN REQUEST ===");
+    print("POST $uri");
+    print("BODY: $bodyJson");
 
-  @override
-  Future<void> sendPasswordResetEmail(String email) async {
-    await dio.post('/auth/forgot-password', data: {'email': email});
+    try {
+      final response = await client.post(
+        uri,
+        headers: {"Content-Type": "application/json"},
+        body: bodyJson,
+      );
+
+      print("=== LOGIN RESPONSE ===");
+      print("STATUS: ${response.statusCode}");
+      print("BODY: ${response.body}");
+
+      if (response.statusCode == 200) {
+        return UserModel.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception("Login failed: ${response.body}");
+      }
+    } catch (e, stackTrace) {
+      print("=== LOGIN ERROR ===");
+      print(e);
+      print(stackTrace);
+      rethrow; // để app vẫn nhận exception
+    }
   }
 }

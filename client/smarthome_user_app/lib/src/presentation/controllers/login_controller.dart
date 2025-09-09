@@ -1,33 +1,36 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/entities/user.dart';
-import '../../routes/route_names.dart';
 
-class LoginController extends GetxController {
-  final LoginUsecase loginUsecase;
+class LoginController with ChangeNotifier {
+  final LoginUseCase loginUseCase;
 
-  var isLoading = false.obs;
-  var errorMessage = ''.obs;
-  var currentUser = Rx<User?>(null);
+  LoginController(this.loginUseCase);
 
-  LoginController({required this.loginUsecase});
+  bool isLoading = false;
+  String? errorMessage;
+  User? currentUser;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(
+      String email, String password, BuildContext context) async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
     try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      final user = await loginUsecase(email, password);
-      currentUser.value = user;
-      Get.offAllNamed(RouteNames.home);
-    } catch (e) {
-      errorMessage.value = e.toString();
-    } finally {
-      isLoading.value = false;
-    }
-  }
+      final user = await loginUseCase(email, password);
 
-  void logout() {
-    currentUser.value = null;
-    Get.offAllNamed(RouteNames.home);
+      if (user.token.isNotEmpty) {
+        currentUser = user;
+        Navigator.pushReplacementNamed(context, "/home");
+      } else {
+        errorMessage = "Login failed: invalid response from server";
+      }
+    } catch (e) {
+      errorMessage = "Login failed: $e";
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 }

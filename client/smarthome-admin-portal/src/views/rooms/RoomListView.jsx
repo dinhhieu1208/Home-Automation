@@ -25,17 +25,22 @@ import {
 } from "lucide-react";
 
 import { getRooms, toggleDevice, getRoomAccess } from "../../services/roomService";
-import livingRoomImg from "../../assets/images/camera_living.png";
-import AddRoomModal from "../../components/AddRoomModal"; // import popup
+import { getNotifications } from "../../services/notificationService";
+import livingRoomImg from "../../assets/images/Camera CCTV.png";
+import AddRoomModal from "../../components/AddRoomModal";
+import NotificationsModal from "../../components/NotificationsModal"; 
 
 export default function RoomListView() {
   const [rooms, setRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [members, setMembers] = useState([]);
-  const [showAddRoomModal, setShowAddRoomModal] = useState(false); // state popup
+  const [notifications, setNotifications] = useState([]);
+  const [showAddRoomModal, setShowAddRoomModal] = useState(false);
+  const [showNotificationsModal, setShowNotificationsModal] = useState(false);
 
   useEffect(() => {
     loadRooms();
+    loadNotifications();
   }, []);
 
   useEffect(() => {
@@ -55,6 +60,11 @@ export default function RoomListView() {
     setMembers(data);
   };
 
+  const loadNotifications = async () => {
+    const data = await getNotifications();
+    setNotifications(data);
+  };
+
   const handleToggle = async (deviceId) => {
     await toggleDevice(deviceId);
     await loadRooms();
@@ -71,7 +81,6 @@ export default function RoomListView() {
     smartFan: Fan,
     fan: Fan,
     airpurifier: Wind,
-
     humiditySensor: Thermometer,
     waterSensor: Droplets,
     gasSensor: Flame,
@@ -80,7 +89,6 @@ export default function RoomListView() {
     rainSensor: CloudRain,
     soilMoistureSensor: Sprout,
     doorSensor: DoorClosed,
-
     pump: Waves,
     washingMachine: WashingMachine,
     curtain: Blinds,
@@ -101,7 +109,7 @@ export default function RoomListView() {
         <div className="flex justify-between items-center w-full">
           <span className="text-xs font-semibold">{device.status === "on" ? "on" : "off"}</span>
           <label className="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" checked={device.status === "on"} className="sr-only peer" />
+            <input type="checkbox" checked={device.status === "on"} className="sr-only peer" onChange={handleClick} />
             <div className="w-9 h-5 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 
               after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
               after:bg-white after:border after:rounded-full after:h-4 after:w-4 
@@ -152,7 +160,7 @@ export default function RoomListView() {
 
           <button
             className="flex items-center gap-1 px-2 py-1 rounded-md text-white text-xs bg-blue-600 shadow-md hover:shadow-lg transition-all duration-200 whitespace-nowrap -mt-10"
-            onClick={() => setShowAddRoomModal(true)} // mở popup
+            onClick={() => setShowAddRoomModal(true)}
           >
             <span className="text-sm font-bold">+</span>
             Add Room
@@ -213,24 +221,42 @@ export default function RoomListView() {
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="flex justify-between items-center mb-2">
             <h4 className="font-semibold">Recent Activity</h4>
-            <button className="text-indigo-500 text-sm">View All</button>
+            <button
+              className="text-indigo-500 text-sm"
+              onClick={() => setShowNotificationsModal(true)}
+            >
+              View All
+            </button>
           </div>
           <ul className="space-y-2 text-sm text-gray-600">
-            {selectedRoom?.activities?.map((act, idx) => (
-              <li key={idx}>{act.text}</li>
-            ))}
+            {notifications
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 3)
+              .map((n, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="material-icons text-indigo-600 text-lg">{n.icon}</span>
+                  <span>{n.message}</span>
+                </li>
+              ))}
           </ul>
-        </div>
-      </div>
+            </div>
+          </div>
 
-{showAddRoomModal && (
-  <AddRoomModal
-    isOpen={showAddRoomModal}
-    onClose={() => setShowAddRoomModal(false)}
-    onRoomCreated={loadRooms} // để reload phòng sau khi tạo
-  />
-)}
+      {showAddRoomModal && (
+        <AddRoomModal
+          isOpen={showAddRoomModal}
+          onClose={() => setShowAddRoomModal(false)}
+          onRoomCreated={loadRooms}
+        />
+      )}
 
+      {showNotificationsModal && (
+        <NotificationsModal
+          isOpen={showNotificationsModal}
+          onClose={() => setShowNotificationsModal(false)}
+          notifications={notifications}
+        />
+      )}
     </div>
   );
 }
